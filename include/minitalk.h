@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 20:56:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/24 22:41:12 by gwolf            ###   ########.fr       */
+/*   Created: 2023/03/24 22:05:17 by gwolf             #+#    #+#             */
+/*   Updated: 2023/03/24 22:34:30 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#ifndef MINITALK_H
+# define MINITALK_H
 
-int main(int argc, char *argv[])
-{
-	int pid;
+# define _XOPEN_SOURCE 700
 
-	if (argc != 3)
-	{
-		ft_printf("Please enter pid and then a string\n");
-		return (1);
-	}
-	pid = ft_atoi(argv[1]);
-	kill(pid, SIGUSR1);
-}
+# include <signal.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <signal.h>
+
+# include "ft_print.h"
+
+#endif
