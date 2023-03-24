@@ -18,11 +18,10 @@ LIB_DIR := lib
 LIB_DIR_FT := $(LIB_DIR)/libft
 
 # include
-INC := -I include
+INC := -I include -I lib/libft/include
 
 # libraries
 LIB_FT := -L $(LIB_DIR_FT) -l ft 
-LIBS := $(LIB_FT)
 
 # compiling
 CC := clang
@@ -57,12 +56,12 @@ OBJS_CLIENT := $(addprefix $(OBJ_DIR)/, $(OBJ_CLIENT))
 
 all: $(NAME_SERVER) $(NAME_CLIENT)
 
-$(NAME_SERVER): $(OBJS_SERVER)
-	$(COMPILE) $^ -o $@
+$(NAME_SERVER): $(LIBFT) $(OBJS_SERVER)
+	$(COMPILE) $^ $(LIB_FT) -o $@
 	echo "$(GREEN)$(NAME_SERVER) created!$(RESET)"
 
-$(NAME_CLIENT): $(OBJS_CLIENT)
-	$(COMPILE) $^ -o $@
+$(NAME_CLIENT): $(LIBFT) $(OBJS_CLIENT)
+	$(COMPILE) $^ $(LIB_FT) -o $@
 	echo "$(GREEN)$(NAME_CLIENT) created!$(RESET)"
 
 debug: CFLAGS = -g
