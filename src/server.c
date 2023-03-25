@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:56:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/25 11:01:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/25 11:31:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	ft_convert_bin2dec(int sig, bool reset)
 	}
 	if (sig == SIGUSR1)
 		byte &= ~(1 << bit_count);
-	else if	(sig == SIGUSR2)
+	else if (sig == SIGUSR2)
 		byte |= (1 << bit_count);
 	else
-		return;
+		return ;
 	bit_count++;
 	if (bit_count == 8)
 	{
@@ -55,7 +55,7 @@ void	ft_handle_sigusr(int sig, siginfo_t *info, void *ucontext)
 	kill(info->si_pid, SIGUSR1);
 }
 
-int main(void)
+int	main(void)
 {
 	struct sigaction	act;
 
