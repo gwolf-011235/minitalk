@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 22:05:17 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/24 22:34:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/25 09:27:54 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINITALK_H
 
 # define _XOPEN_SOURCE 700
+# define _DEFAULT_SOURCE
 
 # include <signal.h>
 # include <unistd.h>
