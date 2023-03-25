@@ -6,11 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:56:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/25 10:35:52 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/25 11:01:22 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "server.h"
 
 void	ft_convert_bin2dec(int sig, bool reset)
 {
@@ -60,8 +60,9 @@ int main(void)
 	struct sigaction	act;
 
 	ft_printf("This is my pid: %d\n", getpid());
-	act.sa_flags = SA_SIGINFO;
 	act.sa_sigaction = ft_handle_sigusr;
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &act, NULL) == -1)
 		exit(1);
 	if (sigaction(SIGUSR2, &act, NULL) == -1)
