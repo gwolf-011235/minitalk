@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:56:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/25 09:08:56 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/25 10:12:08 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_handle_sigusr(int sig)
 	return ;
 }
 
-void	ft_dec_to_bin(char c, pid_t server_pid)
+void	ft_convert_dec2bin(char c, pid_t server_pid)
 {
 	int i;
 
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 	sigaction(SIGUSR1, &act, NULL);
 	while (*input != '\0')
 	{
-		ft_dec_to_bin(*input, server_pid);
+		ft_convert_dec2bin(*input, server_pid);
 		input++;
 	}
 }
