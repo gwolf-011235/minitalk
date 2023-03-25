@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:56:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/25 10:20:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/25 10:28:16 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int main(int argc, char *argv[])
 	server_pid = ft_atoi(argv[1]);
 	input = argv[2];
 	act.sa_handler = ft_handle_sigusr;
-	sigaction(SIGUSR1, &act, NULL);
+	if (sigaction(SIGUSR1, &act, NULL) == -1)
+		exit(1);
 	while (*input != '\0')
 	{
 		ft_convert_dec2bin(*input, server_pid);
