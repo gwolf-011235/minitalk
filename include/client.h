@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   client.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 22:05:17 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/25 09:27:54 by gwolf            ###   ########.fr       */
+/*   Created: 2023/03/25 11:00:11 by gwolf             #+#    #+#             */
+/*   Updated: 2023/03/25 11:00:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef CLIENT_H
+# define CLIENT_H
 
 # define _XOPEN_SOURCE 700
 # define _DEFAULT_SOURCE
