@@ -16,9 +16,12 @@ OBJ_DIR := obj
 OBJ_DIR_B := obj/bonus
 LIB_DIR := lib
 LIB_DIR_FT := $(LIB_DIR)/libft
+INC_DIR := include
 
 # include
-INC := -I include -I lib/libft/include
+INC_SERVER := $(INC_DIR)/server.h
+INC_CLIENT := $(INC_DIR)/client.h
+INC := -I $(INC_DIR) -I lib/libft/include
 
 # libraries
 LIB_FT := -L $(LIB_DIR_FT) -l ft 
@@ -56,38 +59,40 @@ OBJS_CLIENT := $(addprefix $(OBJ_DIR)/, $(OBJ_CLIENT))
 
 all: $(NAME_SERVER) $(NAME_CLIENT)
 
-$(NAME_SERVER): $(LIBFT) $(OBJS_SERVER)
-	$(COMPILE) $^ $(LIB_FT) -o $@
+$(NAME_SERVER): $(LIBFT) $(OBJS_SERVER) $(INC_SERVER)
+	$(COMPILE) $(OBJS_SERVER) $(LIB_FT) -o $@
 	echo "$(GREEN)$(NAME_SERVER) created!$(RESET)"
 
-$(NAME_CLIENT): $(LIBFT) $(OBJS_CLIENT)
-	$(COMPILE) $^ $(LIB_FT) -o $@
+$(NAME_CLIENT): $(LIBFT) $(OBJS_CLIENT) $(INC_CLIENT)
+	$(COMPILE) $(OBJS_CLIENT) $(LIB_FT) -o $@
 	echo "$(GREEN)$(NAME_CLIENT) created!$(RESET)"
-
-debug: CFLAGS = -g
-debug: clean $(OBJS) $(LIBFT) $(MLX)
-	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
-	echo "$(NAME) created - DEBUG MODE!"
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) message
 	$(COMPILE) -c $< -o $@
+
+message:
+	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)minitalk$(RESET)]\n"
+
 
 $(LIBFT):
 	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)libft$(RESET)]\n"
 	$(MAKE) -C $(LIB_DIR)/libft
 
 clean: 
-	printf "$(YELLOW)$(BOLD)clean$(RESET) [$(BLUE)fdf$(RESET)]\n"
+	printf "$(YELLOW)$(BOLD)clean$(RESET) [$(BLUE)minitalk$(RESET)]\n"
 	rm -rf $(OBJ_DIR)
-	printf "$(RED)subdir $(OBJ_DIR) cleaned$(RESET)\n"
+	printf "$(RED)removed subdir $(OBJ_DIR)$(RESET)\n"
 
 fclean: clean
 	rm -rf $(NAME_SERVER)
 	rm -rf $(NAME_CLIENT)
-	printf "$(RED)$(NAME_SERVER), $(NAME_CLIENT) cleaned$(RESET)\n"
+	printf "$(RED)removed bin $(NAME_SERVER)$(RESET)\n"
+	printf "$(RED)removed bin $(NAME_CLIENT)$(RESET)\n"
+	printf "$(YELLOW)$(BOLD)clean$(RESET) [$(BLUE)libft$(RESET)]\n"
+	$(MAKE) --no-print-directory -C $(LIB_DIR_FT) fclean
 
 re: fclean all
 	
