@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 10:59:39 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/25 11:15:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/29 14:40:03 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 
 # include "ft_print.h"
 # include "ft_fd.h"
+# include "ft_char.h"
 
 #endif
