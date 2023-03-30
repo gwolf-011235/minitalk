@@ -6,7 +6,7 @@
 /*   By: gwolf < gwolf@student.42vienna.com >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:56:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/30 15:11:06 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:08:50 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ void	ft_handle_sigusr(int sig)
 	return ;
 }
 
-void	ft_convert_dec2bin(uint8_t dec, pid_t server_pid)
+void	ft_convert_char2bin(uint8_t c, pid_t server_pid)
 {
 	int	i;
 	int	bit;
 
-	i = 0;
-	while (i < 8)
+	i = 7;
+	while (i >= 0)
 	{
 		g_wait_for_response = true;
-		bit = (dec & (1 << i));
+		bit = (c & (1 << i));
 		if (bit == 0)
 			kill(server_pid, SIGUSR1);
 		else
 			kill(server_pid, SIGUSR2);
-		i++;
+		i--;
 		while (g_wait_for_response)
 			;
 	}
@@ -45,12 +45,12 @@ void	ft_send_to_server(char *input, pid_t server_pid)
 {
 	while (*input != '\0')
 	{
-		ft_convert_dec2bin(*input, server_pid);
+		ft_convert_char2bin(*input, server_pid);
 		input++;
 	}
 }
 
-bool	ft_is_valid_pid(char *pid)
+pid_t	ft_validate_pid(char *pid)
 {
 	uint32_t	i;
 
@@ -59,11 +59,11 @@ bool	ft_is_valid_pid(char *pid)
 	{
 		if (!ft_isdigit(pid[i]))
 		{
-			return (false);
+			return (0);
 		}
 		i++;
 	}
-	return (true);
+	return (ft_atoi(pid));
 }
 
 int	main(int argc, char *argv[])
@@ -76,8 +76,8 @@ int	main(int argc, char *argv[])
 		ft_printf("Please enter PID and then a string\n");
 		return (1);
 	}
-	server_pid = ft_atoi(argv[1]);
-	if (!ft_is_valid_pid(argv[1]))
+	server_pid = ft_validate_pid(argv[1]);
+	if (server_pid == 0)
 	{
 		ft_printf("Please enter a valid PID\n");
 		return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: gwolf < gwolf@student.42vienna.com >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:56:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/29 16:07:14 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:05:17 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	ft_convert_bin2dec(int sig, bool reset)
 		return ;
 	}
 	if (sig == SIGUSR1)
-		byte &= ~(1 << bit_count);
+		byte = byte << 1;
 	else if (sig == SIGUSR2)
-		byte |= (1 << bit_count);
+		byte = (byte << 1) | 1;
 	else
 		return ;
 	bit_count++;
