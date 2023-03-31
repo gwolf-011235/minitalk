@@ -6,7 +6,7 @@
 /*   By: gwolf < gwolf@student.42vienna.com >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 11:00:11 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/30 16:07:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/31 11:28:18 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 pid_t	ft_validate_pid(char *pid);
 void	ft_send_to_server(char *input, pid_t server_pid);
-void	ft_convert_char2bin(uint8_t c, pid_t server_pid);
+void	ft_convert_byte2bits(uint8_t c, pid_t server_pid);
 void	ft_handle_sigusr(int sig);
 
 #endif
