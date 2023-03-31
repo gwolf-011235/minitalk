@@ -6,15 +6,12 @@
 /*   By: gwolf < gwolf@student.42vienna.com >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 10:59:39 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/31 11:37:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/31 11:48:21 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SERVER_H
 # define SERVER_H
-
-# define _XOPEN_SOURCE 700
-# define _DEFAULT_SOURCE
 
 # include <signal.h>
 # include <unistd.h>
