@@ -36,11 +36,6 @@ NAME_SERVER := server
 NAME_CLIENT := client
 LIBFT := $(LIB_DIR_FT)/libft.a
 
-# progress bar
-HIT_TOTAL = $(words $(SRCS))
-HIT_COUNT = $(eval HIT_N != expr ${HIT_N} + 1)${HIT_N}
-ECHO = printf "\033[2K\r[`expr ${HIT_COUNT} '*' 100 / ${HIT_TOTAL}`%%] %s"
-
 # source files
 SRC_SERVER :=  server.c
 SRC_CLIENT :=  client.c
@@ -60,6 +55,8 @@ OBJS_CLIENT := $(addprefix $(OBJ_DIR)/, $(OBJ_CLIENT))
 all: $(NAME_SERVER) $(NAME_CLIENT)
 	echo "$(GREEN)ALL DONE$(RESET)"
 
+bonus: all
+
 $(NAME_SERVER): $(LIBFT) $(OBJS_SERVER) $(INC_SERVER)
 	$(COMPILE) $(OBJS_SERVER) $(LIB_FT) -o $@
 	echo "$(GREEN)$(NAME_SERVER) created!$(RESET)"
@@ -76,7 +73,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) message
 
 message:
 	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)minitalk$(RESET)]\n"
-
 
 $(LIBFT):
 	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)libft$(RESET)]\n"
