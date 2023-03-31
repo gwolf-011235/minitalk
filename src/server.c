@@ -6,51 +6,48 @@
 /*   By: gwolf < gwolf@student.42vienna.com >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:56:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/30 16:05:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/31 11:42:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-void	ft_convert_bin2dec(int sig, bool reset)
-{
-	static uint32_t	byte;
-	static uint8_t	bit_count;
+t_msg	g_msg;
 
+void	ft_convert_bits2byte(int sig, bool reset)
+{
 	if (reset)
 	{
-		byte = 0;
-		bit_count = 0;
-		return ;
+		g_msg.byte = 0;
+		g_msg.bit_count = 0;
 	}
 	if (sig == SIGUSR1)
-		byte = byte << 1;
+		g_msg.byte = g_msg.byte << 1;
 	else if (sig == SIGUSR2)
-		byte = (byte << 1) | 1;
+		g_msg.byte = (g_msg.byte << 1) | 1;
 	else
 		return ;
-	bit_count++;
-	if (bit_count == 8)
+	g_msg.bit_count++;
+	if (g_msg.bit_count == 8)
 	{
-		write(0, &byte, 1);
-		byte = 0;
-		bit_count = 0;
+		write(0, &g_msg.byte, 1);
+		g_msg.byte = 0;
+		g_msg.bit_count = 0;
 	}
 }
 
 void	ft_handle_sigusr(int sig, siginfo_t *info, void *ucontext)
 {
-	static pid_t	last_client;
+	bool	reset;
 
 	(void)ucontext;
-	if (!last_client)
-		last_client = info->si_pid;
-	else if (last_client != info->si_pid)
+	reset = false;
+	if (g_msg.last_client != info->si_pid)
 	{
-		ft_convert_bin2dec(sig, true);
-		last_client = info->si_pid;
+		g_msg.last_client = info->si_pid;
+		reset = true;
 	}
-	ft_convert_bin2dec(sig, false);
+	ft_convert_bits2byte(sig, reset);
 	kill(info->si_pid, SIGUSR1);
 }
 
