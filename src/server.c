@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwolf < gwolf@student.42vienna.com >       +#+  +:+       +#+        */
+/*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:56:49 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/31 11:42:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/04/22 11:13:57 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,8 @@
 
 t_msg	g_msg;
 
-void	ft_convert_bits2byte(int sig, bool reset)
+void	ft_convert_bits2byte(int sig)
 {
-	if (reset)
-	{
-		g_msg.byte = 0;
-		g_msg.bit_count = 0;
-	}
 	if (sig == SIGUSR1)
 		g_msg.byte = g_msg.byte << 1;
 	else if (sig == SIGUSR2)
@@ -38,16 +33,15 @@ void	ft_convert_bits2byte(int sig, bool reset)
 
 void	ft_handle_sigusr(int sig, siginfo_t *info, void *ucontext)
 {
-	bool	reset;
-
 	(void)ucontext;
-	reset = false;
 	if (g_msg.last_client != info->si_pid)
 	{
 		g_msg.last_client = info->si_pid;
-		reset = true;
+		g_msg.byte = 0;
+		g_msg.bit_count = 0;
 	}
-	ft_convert_bits2byte(sig, reset);
+	else
+		ft_convert_bits2byte(sig);
 	kill(info->si_pid, SIGUSR1);
 }
 

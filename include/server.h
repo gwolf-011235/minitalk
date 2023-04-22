@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwolf < gwolf@student.42vienna.com >       +#+  +:+       +#+        */
+/*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 10:59:39 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/31 11:48:21 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/04/22 11:07:30 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_msg
 	uint8_t		bit_count;
 }	t_msg;
 
-void	ft_convert_bits2byte(int sig, bool reset);
+void	ft_convert_bits2byte(int sig);
 void	ft_handle_sigusr(int sig, siginfo_t *info, void *ucontext);
 
 #endif

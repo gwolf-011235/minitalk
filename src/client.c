@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwolf < gwolf@student.42vienna.com >       +#+  +:+       +#+        */
+/*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:56:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/31 11:33:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/04/22 11:23:22 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ void	ft_convert_byte2bits(uint8_t c, pid_t server_pid)
 
 void	ft_send_to_server(char *input, pid_t server_pid)
 {
+	g_wait_for_response = true;
+	kill(server_pid, SIGUSR1);
+	sleep(1);
+	if (g_wait_for_response)
+	{
+		ft_printf("Timeout. Please check PID\n");
+		exit(1);
+	}
 	while (*input != '\0')
 	{
 		ft_convert_byte2bits(*input, server_pid);
